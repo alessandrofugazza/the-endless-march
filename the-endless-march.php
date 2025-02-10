@@ -1,16 +1,19 @@
 <?php
 /**
- * @package Hello_Dolly
- * @version 1.7.2
+ * The Endless March
+ * @package 		TheEndlessMarch
+ * @author 			Alessandro Fugazza
+ * @version 		0.1.1
+ *
+ * @wordpress-plugin
+ * Plugin Name: 	The Endless March
+ * Plugin URI: 		https://alessandrofugazza.com/misc/the-endless-march/
+ * Description: 	Harbingers of the new dawn.
+ * Version: 		0.1.1
+ * Author: 			Alessandro Fugazza
+ * Author URI: 		https://alessandrofugazza.com/
+ * Update URI: 		https://alessandrofugazza.com/misc/the-endless-march/
  */
-/*
-Plugin Name: The Endless March
-Plugin URI: https://alessandrofugazza.com/misc/the-endless-march/
-Description: Harbingers of the new dawn.
-Author: Alessandro Fugazza
-Version: 0.1.0
-Author URI: https://alessandrofugazza.com/
-*/
 
 function hello_dolly_get_lyric()
 {
