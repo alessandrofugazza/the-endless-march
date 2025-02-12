@@ -42,15 +42,9 @@ FIGHT TO DAWN!";
 function hello_dolly()
 {
 	$chosen = hello_dolly_get_lyric();
-	$lang = '';
-	if ('en_' !== substr(get_user_locale(), 0, 3)) {
-		$lang = ' lang="en"';
-	}
 
 	printf(
-		'<p id="dolly"><span class="screen-reader-text">%s </span><span dir="ltr"%s>%s</span></p>',
-		__('Quote from Hello Dolly song, by Jerry Herman:', 'hello-dolly'),
-		$lang,
+		'<p id="dolly"><span dir="ltr">%s</span></p>',
 		$chosen
 	);
 }
