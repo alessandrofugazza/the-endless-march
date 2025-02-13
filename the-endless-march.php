@@ -2,7 +2,6 @@
 /**
  * The Endless March
  * @package 		TheEndlessMarch
- * @author 			Alessandro Fugazza
  * @version 		0.1.1
  *
  * @wordpress-plugin
@@ -38,7 +37,6 @@ FIGHT TO DAWN!";
 	return wptexturize($lyrics[mt_rand(0, count($lyrics) - 1)]);
 }
 
-// This just echoes the chosen line, we'll position it later.
 function hello_dolly()
 {
 	$chosen = hello_dolly_get_lyric();
@@ -49,10 +47,8 @@ function hello_dolly()
 	);
 }
 
-// Now we set that function up to execute when the admin_notices action is called.
 add_action('admin_notices', 'hello_dolly');
 
-// We need some CSS to position the paragraph.
 function dolly_css()
 {
 	echo "
@@ -83,3 +79,16 @@ function dolly_css()
 }
 
 add_action('admin_head', 'dolly_css');
+
+function dolly_enqueue_scripts()
+{
+	wp_enqueue_script(
+		'dolly-custom-script',
+		plugin_dir_url(__FILE__) . '/admin/js/script.js',
+		array(),
+		'0.1.1',
+		true
+	);
+}
+
+add_action('admin_enqueue_scripts', 'dolly_enqueue_scripts');
