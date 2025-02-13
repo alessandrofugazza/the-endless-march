@@ -14,6 +14,18 @@
  * Update URI: 		https://alessandrofugazza.com/misc/the-endless-march/
  */
 
+if (!defined('ABSPATH')) {
+	exit;
+}
+
+// if (is_admin()) {
+// 	require_once __DIR__ . '/admin/the-endless-march.php';
+// } else {
+// 	require_once __DIR__ . '/public/the-endless-march.php';
+// }
+
+
+
 function hello_dolly_get_lyric()
 {
 	/** These are the lyrics to Hello Dolly */
