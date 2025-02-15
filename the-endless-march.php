@@ -26,9 +26,9 @@ if (!defined('ABSPATH')) {
 
 
 
-function hello_dolly_get_lyric()
+function the_endless_march_get_lyric()
 {
-	/** These are the lyrics to Hello Dolly */
+	/** These are the lyrics to Hello endless_march */
 	$lyrics = "HEART, STEEL
 WE KILL
 IRON WILL
@@ -49,58 +49,39 @@ FIGHT TO DAWN!";
 	return wptexturize($lyrics[mt_rand(0, count($lyrics) - 1)]);
 }
 
-function hello_dolly()
+function the_endless_march()
 {
-	$chosen = hello_dolly_get_lyric();
+	$chosen = the_endless_march_get_lyric();
 
 	printf(
-		'<p id="dolly"><span dir="ltr">%s</span></p>',
+		'<p id="endless-march"><span dir="ltr">%s</span></p>',
 		$chosen
 	);
 }
 
-add_action('admin_notices', 'hello_dolly');
+add_action('admin_notices', 'the_endless_march');
 
-function dolly_css()
+function endless_march_enqueue_styles()
 {
-	echo "
-	<style type='text/css'>
-	#dolly {
-		float: right;
-		padding: 5px 10px;
-		margin: 0;
-		font-size: 12px;
-		line-height: 1.6666;
-	}
-	.rtl #dolly {
-		float: left;
-	}
-	.block-editor-page #dolly {
-		display: none;
-	}
-	@media screen and (max-width: 782px) {
-		#dolly,
-		.rtl #dolly {
-			float: none;
-			padding-left: 0;
-			padding-right: 0;
-		}
-	}
-	</style>
-	";
+	wp_enqueue_style(
+		'admin-style',
+		plugin_dir_url(__FILE__) . 'admin/css/admin-style.css',
+		array(),
+		'0.1.1'
+	);
 }
 
-add_action('admin_head', 'dolly_css');
+add_action('admin_enqueue_scripts', 'endless_march_enqueue_styles');
 
-function dolly_enqueue_scripts()
+function endless_march_enqueue_scripts()
 {
 	wp_enqueue_script(
-		'dolly-custom-script',
-		plugin_dir_url(__FILE__) . '/admin/js/script.js',
+		'admin-script',
+		plugin_dir_url(__FILE__) . '/admin/js/admin-script.js',
 		array(),
 		'0.1.1',
 		true
 	);
 }
 
-add_action('admin_enqueue_scripts', 'dolly_enqueue_scripts');
+add_action('admin_enqueue_scripts', 'endless_march_enqueue_scripts');
