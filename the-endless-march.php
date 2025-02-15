@@ -1,4 +1,5 @@
 <?php
+// TODO https://semver.org
 /**
  * The Endless March
  * @link 			https://alessandrofugazza.com/misc/the-endless-march/
@@ -30,6 +31,8 @@ if (!defined('ABSPATH')) {
 if (!defined('WPINC')) {
 	die;
 }
+
+define('THE_ENDLESS_MARCH_VERSION', '0.1.1');
 
 function the_endless_march_get_lyric()
 {
