@@ -1,3 +1,3 @@
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("ADMIN JS READY");
+  console.log("PUBLIC JS READY");
 });
