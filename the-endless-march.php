@@ -5,13 +5,13 @@
  * @link 			https://alessandrofugazza.com/misc/the-endless-march/
  * @since			0.1.0
  * @package 		The_Endless_March
- * @version 		0.1.1
+ * @version 		0.1.2
  *
  * @wordpress-plugin
  * Plugin Name: 	The Endless March
  * Plugin URI: 		https://alessandrofugazza.com/misc/the-endless-march/
  * Description: 	Harbingers of the new dawn.
- * Version: 		0.1.1
+ * Version: 		0.1.2
  * Author: 			Alessandro Fugazza
  * Author URI: 		https://alessandrofugazza.com/
  * Update URI: 		https://alessandrofugazza.com/misc/the-endless-march/
@@ -32,7 +32,17 @@ if (!defined('WPINC')) {
 	die;
 }
 
-define('THE_ENDLESS_MARCH_VERSION', '0.1.1');
+define('THE_ENDLESS_MARCH_VERSION', '0.1.2');
+
+function activate_the_endless_march()
+{
+	require_once plugin_dir_path(__FILE__) . 'includes/class-the-endless-march-activator.php';
+	The_Endless_March_Activator::activate();
+}
+
+register_activation_hook(__FILE__, 'activate_the_endless_march');
+
+
 
 function the_endless_march_get_lyric()
 {
