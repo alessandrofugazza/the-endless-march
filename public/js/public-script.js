@@ -16,11 +16,37 @@ document.addEventListener("DOMContentLoaded", function () {
   //     console.log(element.innerHTML);
   //   });
   //   console.log(elements);
-  let newCode = document.createElement("code");
-  newCode.textContent = "This is a code tag coming from my plugin.";
-  playground.appendChild(newCode);
-  let newParagraph = document.createElement("p");
-  newParagraph.textContent = "This is a paragraph tag coming from my plugin.";
-  newParagraph.style.color = "red";
-  playground.appendChild(newParagraph);
+  if (playground) {
+    let newCode = document.createElement("code");
+    newCode.textContent = "This is a code tag coming from my plugin.";
+    playground.appendChild(newCode);
+    let newParagraph = document.createElement("p");
+    newParagraph.textContent = "This is a paragraph tag coming from my plugin.";
+    newParagraph.style.color = "pink";
+    newParagraph.style.fontSize = "xx-large";
+    newParagraph.style.backgroundColor = "blue";
+    playground.appendChild(newParagraph);
+    let newButton = document.createElement("button");
+    const btnFunction = () => {
+      alert("Good job!");
+    };
+    newButton.textContent = "Click me!";
+    // newButton.onclick = btnFunction;
+    newButton.addEventListener("click", btnFunction);
+    playground.appendChild(newButton);
+    let mouseOverDiv = document.createElement("div");
+    mouseOverDiv.textContent = "Mouse over me!";
+    mouseOverDiv.style.padding = "10px";
+    mouseOverDiv.style.border = "1px solid black";
+    mouseOverDiv.style.backgroundColor = "yellow";
+    mouseOverDiv.addEventListener("mouseover", () => {
+      mouseOverDiv.style.backgroundColor = "red";
+    });
+    mouseOverDiv.addEventListener("mouseleave", () => {
+      mouseOverDiv.style.backgroundColor = "yellow";
+    });
+    playground.appendChild(mouseOverDiv);
+  } else {
+    console.log("No playground found!");
+  }
 });
