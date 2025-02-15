@@ -1,7 +1,9 @@
 <?php
 /**
  * The Endless March
- * @package 		TheEndlessMarch
+ * @link 			https://alessandrofugazza.com/misc/the-endless-march/
+ * @since			0.1.0
+ * @package 		The_Endless_March
  * @version 		0.1.1
  *
  * @wordpress-plugin
@@ -24,7 +26,10 @@ if (!defined('ABSPATH')) {
 // 	require_once __DIR__ . '/public/the-endless-march.php';
 // }
 
-
+// If this file is called directly, abort.
+if (!defined('WPINC')) {
+	die;
+}
 
 function the_endless_march_get_lyric()
 {
