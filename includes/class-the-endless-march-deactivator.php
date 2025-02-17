@@ -20,7 +20,7 @@
  * @subpackage The_Endless_March/includes
  * @author     Alessandro Fugazza <alessandro.fugazza01@gmail.com>
  */
-class The_Endless_March_Activator
+class The_Endless_March_Deactivator
 {
 
     /**
@@ -30,9 +30,9 @@ class The_Endless_March_Activator
      *
      * @since    0.1.2
      */
-    public static function activate()
+    public static function deactivate()
     {
-        error_log("TEM ACTIVATED");
+        error_log("TEM DEACTIVATED");
     }
 
 }

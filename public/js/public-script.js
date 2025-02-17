@@ -46,6 +46,16 @@ document.addEventListener("DOMContentLoaded", function () {
       mouseOverDiv.style.backgroundColor = "yellow";
     });
     playground.appendChild(mouseOverDiv);
+    let boringTextNode = document.createTextNode("Boring...");
+    playground.appendChild(boringTextNode);
+    let boringH3 = document.createElement("h3");
+    playground.appendChild(boringH3);
+    playground.removeChild(boringH3);
+    let anotherP = document.createElement("p");
+    anotherP.textContent = "This is another paragraph.";
+    playground.appendChild(anotherP);
+    pS = document.getElementsByTagName("p");
+    console.log(pS);
   } else {
     console.log("No playground found!");
   }
