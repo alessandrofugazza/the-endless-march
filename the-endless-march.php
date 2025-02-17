@@ -40,8 +40,14 @@ function activate_the_endless_march()
 	The_Endless_March_Activator::activate();
 }
 
-register_activation_hook(__FILE__, 'activate_the_endless_march');
+function deactivate_the_endless_march()
+{
+	require_once plugin_dir_path(__FILE__) . 'includes/class-the-endless-march-deactivator.php';
+	The_Endless_March_Deactivator::deactivate();
+}
 
+register_activation_hook(__FILE__, 'activate_the_endless_march');
+register_deactivation_hook(__FILE__, 'deactivate_the_endless_march'); // didnt i do this already?
 
 
 function the_endless_march_get_lyric()
