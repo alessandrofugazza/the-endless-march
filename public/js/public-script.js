@@ -56,14 +56,20 @@ document.addEventListener("DOMContentLoaded", function () {
     // playground.appendChild(anotherP);
     // pS = document.getElementsByTagName("p");
     // console.log(pS);
+    const stuffToAppend = [];
+    const appendStuff = (stuff) => {
+      stuffToAppend.push(stuff);
+    };
     const formInput = document.createElement("input");
     formInput.setAttribute("type", "number");
     formInput.setAttribute("min", "50");
     formInput.setAttribute("max", "100");
     formInput.setAttribute("id", "age");
-    playground.appendChild(formInput);
+    appendStuff(formInput);
+    // playground.appendChild(formInput);
     const message = document.createElement("p");
-    playground.appendChild(message);
+    // playground.appendChild(message);
+    appendStuff(message);
     const formBtn = document.createElement("button");
     formBtn.textContent = "Check input";
     formBtn.setAttribute("type", "button");
@@ -72,11 +78,23 @@ document.addEventListener("DOMContentLoaded", function () {
         message.textContent = "✅ Input is valid!";
         message.style.color = "green";
       } else {
-        message.textContent = "❌ Input is invalid!";
+        message.textContent = "❌ Input is invalid: " + formInput.validationMessage;
         message.style.color = "red";
       }
     });
-    playground.appendChild(formBtn);
+    // playground.appendChild(formBtn);
+    appendStuff(formBtn);
+    // const BOMManipulationBtn = document.createElement("button");
+    // BOMManipulationBtn.textContent = "BOM Manipulation";
+    // BOMManipulationBtn.setAttribute("type", "button");
+    // BOMManipulationBtn.addEventListener("click", () => {
+    //   console.log(window.navigator.online);
+    // });
+    // playground.appendChild(BOMManipulationBtn);
+    appendStuff(BOMManipulationBtn);
+    stuffToAppend.forEach((stuff) => {
+      playground.appendChild(stuff);
+    });
   } else {
     console.log("No playground found!");
   }
