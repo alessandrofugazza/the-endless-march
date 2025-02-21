@@ -60,30 +60,36 @@ document.addEventListener("DOMContentLoaded", function () {
     const appendStuff = (stuff) => {
       stuffToAppend.push(stuff);
     };
+    const makeMessageP = (id) => {
+      const message = document.createElement("p");
+      message.setAttribute("id", id);
+      appendStuff(message);
+    };
+    const makeHr = () => {
+      const hr = document.createElement("hr");
+      appendStuff(hr);
+    };
     const formInput = document.createElement("input");
     formInput.setAttribute("type", "number");
     formInput.setAttribute("min", "50");
     formInput.setAttribute("max", "100");
     formInput.setAttribute("id", "age");
-    appendStuff(formInput);
     // playground.appendChild(formInput);
-    const message = document.createElement("p");
+    const validationMessage = document.createElement("p");
     // playground.appendChild(message);
-    appendStuff(message);
     const formBtn = document.createElement("button");
     formBtn.textContent = "Check input";
     formBtn.setAttribute("type", "button");
     formBtn.addEventListener("click", () => {
       if (formInput.checkValidity()) {
-        message.textContent = "✅ Input is valid!";
-        message.style.color = "green";
+        validationMessage.textContent = "✅ Input is valid!";
+        validationMessage.style.color = "green";
       } else {
-        message.textContent = "❌ Input is invalid: " + formInput.validationMessage;
-        message.style.color = "red";
+        validationMessage.textContent = "❌ Input is invalid: " + formInput.validationMessage;
+        validationMessage.style.color = "red";
       }
     });
     // playground.appendChild(formBtn);
-    appendStuff(formBtn);
     // const BOMManipulationBtn = document.createElement("button");
     // BOMManipulationBtn.textContent = "BOM Manipulation";
     // BOMManipulationBtn.setAttribute("type", "button");
@@ -91,7 +97,14 @@ document.addEventListener("DOMContentLoaded", function () {
     //   console.log(window.navigator.online);
     // });
     // playground.appendChild(BOMManipulationBtn);
-    appendStuff(BOMManipulationBtn);
+
+    appendStuff(formInput);
+    appendStuff(validationMessage);
+    appendStuff(formBtn);
+    // appendStuff(BOMManipulationBtn);
+    makeHr();
+    makeMessageP("message1");
+
     stuffToAppend.forEach((stuff) => {
       playground.appendChild(stuff);
     });
