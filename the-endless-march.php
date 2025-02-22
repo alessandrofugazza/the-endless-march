@@ -49,9 +49,9 @@ function deactivate_the_endless_march()
 register_activation_hook(__FILE__, 'activate_the_endless_march');
 register_deactivation_hook(__FILE__, 'deactivate_the_endless_march'); // didnt i do this already?
 
-// HERE!!!!!
-// require plugin_dir_path(__FILE__) . 'includes/class-plugin-name.php'; 
+require plugin_dir_path(__FILE__) . 'includes/class-the-endless-march.php';
 
+// HERE
 
 function the_endless_march_get_lyric()
 {
