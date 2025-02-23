@@ -89,7 +89,7 @@ function endless_march_enqueue_styles()
 {
 	wp_enqueue_style(
 		'admin-style',
-		plugin_dir_url(__FILE__) . 'admin/css/admin-style.css',
+		plugins_url('admin/css/admin-style.css', __FILE__),
 		array(),
 		'0.1.1'
 	);
@@ -101,7 +101,7 @@ function endless_march_enqueue_admin_scripts()
 {
 	wp_enqueue_script(
 		'admin-script',
-		plugin_dir_url(__FILE__) . '/admin/js/admin-script.js',
+		plugins_url('admin/js/admin-script.js', __FILE__),
 		array(),
 		'0.1.1',
 		true
@@ -114,7 +114,7 @@ function endless_march_enqueue_public_scripts()
 {
 	wp_enqueue_script(
 		'public-script',
-		plugin_dir_url(__FILE__) . '/public/js/public-script.js',
+		plugins_url('public/js/public-script.js', __FILE__),
 		array(),
 		'0.1.2',
 		true
