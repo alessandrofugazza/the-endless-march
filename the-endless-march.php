@@ -126,5 +126,19 @@ function endless_march_enqueue_public_scripts()
 		'0.1.2',
 		true
 	);
+	// wp_enqueue_script(
+	// 	'js-for-web-design',
+	// 	plugins_url('public/js/js-for-web-design/elements.js', __FILE__),
+	// 	array(),
+	// 	'0.1.2',
+	// 	true
+	// );
+	wp_enqueue_script(
+		'js-for-web-design',
+		plugins_url('public/js/js-for-web-design/js-for-web-design.js', __FILE__),
+		array(),
+		'0.1.2',
+		true
+	);
 }
 add_action('wp_enqueue_scripts', 'endless_march_enqueue_public_scripts');
