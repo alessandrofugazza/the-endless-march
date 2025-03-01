@@ -1,0 +1,7 @@
+.topic-frame {
+    transition: opacity 1s ease;
+}
+
+.topic-frame.fade-out {
+    opacity: 0;
+}
