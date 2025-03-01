@@ -12,16 +12,37 @@ class Frame {
     this.title = _title;
     this.elements = _elements;
     this.parentFrame = _parentFrame;
+    this.thisFrame = null; // lol
   }
   populate() {
-    const thisFrame = addElement("div", this.parentFrame);
+    this.thisFrame = addElementToFrame("div", this.parentFrame);
+    this.thisFrame.style.display = "none";
     this.elements.forEach((element) => {
-      addElement(element.type, thisFrame, element.attributes);
+      addElementToFrame(element.type, this.thisFrame, element.attributes);
     });
+  }
+  show() {
+    this.thisFrame.style.display = "block";
   }
 }
 
-function addElement(type, frame = activeFrame, attributes = {}) {
+function addElementToFrame(type, frame = activeFrame, attributes = {}) {
+  const element = document.createElement(type);
+  for (let key in attributes) {
+    if (key === "textContent") {
+      element.textContent = attributes[key];
+    } else {
+      element.setAttribute(key, attributes[key]);
+    }
+  }
+  if (frame) {
+    frame.appendChild(element);
+  }
+  return element;
+}
+
+// BAD
+function addElementToDOM(type, frame = mainContainer, attributes = {}) {
   const element = document.createElement(type);
   for (let key in attributes) {
     if (key === "textContent") {
@@ -53,27 +74,15 @@ const frames = [
   ),
 ];
 
-// const populateElements = () => {
-// activeFrame = mainContainer;
-// elements.push({frame[new DOMElement("p", { textContent: "YO" }), new DOMElement("h3", { textContent: "H3 HERE" })]});
-// elements.push([new DOMElement("p", { textContent: "YO" }), new DOMElement("h3", { textContent: "H3 HERE" })]);
-// };
-
 function startMainScript() {
-  // const nextButton = addElement("button", { textContent: "NEXT" });
-  // nextButton.onclick = function () {
-  //   elements[blockIndex].forEach((element) => {
-  //     addElement(element.type, element.attributes);
-  //   });
-  // };
-  // elements.forEach((elementsBlock) => {
-  //   elementsBlock.forEach((element) => {
-  //     addElement(element.type, element.attributes, element.frame);
-  //   });
-  // });
+  const nextButton = addElementToDOM("button", activeFrame, { textContent: "NEXT" });
   frames.forEach((frame) => {
     frame.populate();
   });
+  nextButton.onclick = function () {
+    frames[blockIndex].show();
+    blockIndex += 1;
+  };
 }
 
 document.addEventListener("DOMContentLoaded", function () {
