@@ -63,6 +63,8 @@ function addElementToDOM(type, frame = mainContainer, attributes = {}) {
 
 let blockIndex = 0;
 const mainContainer = document.querySelector(".jsfwd-container");
+const prevBtn = document.querySelector(".prev-btn");
+const nextBtn = document.querySelector(".next-btn");
 mainContainer.style.minHeight = "30vh";
 let activeFrame = mainContainer;
 
@@ -94,15 +96,13 @@ function startMainScript() {
   // frames.forEach((frame) => {
   //   frame.populate();
   // });
-  const prevButton = addElementToDOM("button", controlPanel, { textContent: "PREV" });
-  prevButton.onclick = function () {
+  prevBtn.onclick = function () {
     if (blockIndex === 0) return;
     blockIndex--;
     frames[blockIndex].populate();
     mainContainer.replaceChildren(frames[blockIndex].thisFrame);
   };
-  const nextButton = addElementToDOM("button", controlPanel, { textContent: "NEXT" });
-  nextButton.onclick = function () {
+  nextBtn.onclick = function () {
     if (blockIndex === frames.length - 1) return;
     blockIndex++;
     frames[blockIndex].populate();
