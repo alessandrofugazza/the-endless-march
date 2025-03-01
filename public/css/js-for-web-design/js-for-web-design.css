@@ -1,0 +1,16 @@
+.topic-frame {
+    transition: opacity 1s ease, transform 1s ease, max-height 1s ease;
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 100vh;
+    /* Adjust as needed */
+    overflow: hidden;
+}
+
+.topic-frame.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    max-height: 0;
+    /* Collapse height smoothly */
+    pointer-events: none;
+}

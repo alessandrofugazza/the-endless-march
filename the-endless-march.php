@@ -97,6 +97,19 @@ function endless_march_enqueue_styles()
 
 add_action('admin_enqueue_scripts', 'endless_march_enqueue_styles');
 
+function endless_march_enqueue_public_styles()
+{
+	wp_enqueue_style(
+		'js-for-web-design',
+		plugins_url('public/css/js-for-web-design/js-for-web-design.css', __FILE__),
+		array(),
+		'0.1.2'
+	);
+}
+
+add_action('wp_enqueue_scripts', 'endless_march_enqueue_public_styles');
+
+
 function endless_march_enqueue_admin_scripts()
 {
 	wp_enqueue_script(

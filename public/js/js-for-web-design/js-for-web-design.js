@@ -1,7 +1,7 @@
 const elements = [];
 
 class DOMElement {
-  constructor(_type, _attributes, _frame) {
+  constructor(_type, _attributes = {}) {
     this.type = _type;
     this.attributes = _attributes;
   }
@@ -15,14 +15,18 @@ class Frame {
     this.thisFrame = null; // lol
   }
   populate() {
-    this.thisFrame = addElementToFrame("div", this.parentFrame);
+    this.thisFrame = addElementToFrame("div", this.parentFrame, { class: "topic-frame hidden" });
     this.thisFrame.style.display = "none";
+    // this.thisFrame.style.opacity = "0";
     this.elements.forEach((element) => {
       addElementToFrame(element.type, this.thisFrame, element.attributes);
     });
   }
   show() {
-    this.thisFrame.style.display = "block";
+    this.thisFrame.classList.remove("hidden");
+  }
+  hide() {
+    this.thisFrame.classList.add("hidden");
   }
 }
 
@@ -59,6 +63,7 @@ function addElementToDOM(type, frame = mainContainer, attributes = {}) {
 
 let blockIndex = 0;
 const mainContainer = document.querySelector(".jsfwd-container");
+mainContainer.style.minHeight = "30vh";
 let activeFrame = mainContainer;
 
 const frames = [
@@ -75,13 +80,15 @@ const frames = [
 ];
 
 function startMainScript() {
-  const nextButton = addElementToDOM("button", activeFrame, { textContent: "NEXT" });
+  const controlPanel = addElementToDOM("div", mainContainer.parentElement);
   frames.forEach((frame) => {
     frame.populate();
   });
+  const nextButton = addElementToDOM("button", controlPanel, { textContent: "NEXT" });
   nextButton.onclick = function () {
-    frames[blockIndex].show();
     blockIndex += 1;
+    frames[blockIndex - 1].hide();
+    frames[blockIndex].show();
   };
 }
 
