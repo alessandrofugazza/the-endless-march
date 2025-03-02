@@ -99,12 +99,12 @@ add_action('admin_enqueue_scripts', 'endless_march_enqueue_styles');
 
 function endless_march_enqueue_public_styles()
 {
-	wp_enqueue_style(
-		'js-for-web-design',
-		plugins_url('public/css/js-for-web-design/js-for-web-design.css', __FILE__),
-		array(),
-		'0.1.2'
-	);
+	// wp_enqueue_style(
+	// 	'js-for-web-design',
+	// 	plugins_url('public/js-for-web-design/js-for-web-design.css', __FILE__),
+	// 	array(),
+	// 	'0.1.2'
+	// );
 }
 
 add_action('wp_enqueue_scripts', 'endless_march_enqueue_public_styles');
@@ -146,12 +146,43 @@ function endless_march_enqueue_public_scripts()
 	// 	'0.1.2',
 	// 	true
 	// );
+	// wp_enqueue_script(
+	// 	'js-for-web-design',
+	// 	plugins_url('public/js-for-web-design/js-for-web-design.js', __FILE__),
+	// 	array(),
+	// 	'0.1.2',
+	// 	true
+	// );
+
+	// add_filter('script_loader_tag', 'the_endless_march_add_defer_attribute', 10, 2);
+
+	// wp_enqueue_script(
+	// 	'lame-editor',
+	// 	plugins_url('public/lame-editor/lame-editor.js', __FILE__),
+	// 	array(),
+	// 	'0.1.2',
+	// 	true
+	// );
+
+	// add_filter('script_loader_tag', 'the_endless_march_add_defer_attribute', 10, 2);
+
 	wp_enqueue_script(
-		'js-for-web-design',
-		plugins_url('public/js/js-for-web-design/js-for-web-design.js', __FILE__),
+		'wpforms-lame-editor',
+		plugins_url('public/wpforms-lame-editor/wpforms-lame-editor.js', __FILE__),
 		array(),
 		'0.1.2',
 		true
 	);
+
+	add_filter('script_loader_tag', 'the_endless_march_add_defer_attribute', 10, 2);
 }
-add_action('wp_enqueue_scripts', 'endless_march_enqueue_public_scripts');
+
+function the_endless_march_add_defer_attribute($tag, $handle)
+{
+	if ('js-for-web-design' === $handle || 'lame-editor' === $handle || 'wpforms-lame-editor' === $handle) {
+		return str_replace(' src', ' defer src', $tag);
+	}
+	return $tag;
+}
+
+add_action('wp_enqueue_scripts', 'the_endless_march_enqueue_public_scripts');
