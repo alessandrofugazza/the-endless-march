@@ -85,7 +85,7 @@ function the_endless_march()
 
 add_action('admin_notices', 'the_endless_march');
 
-function endless_march_enqueue_styles()
+function the_endless_march_enqueue_styles()
 {
 	wp_enqueue_style(
 		'admin-style',
@@ -95,9 +95,9 @@ function endless_march_enqueue_styles()
 	);
 }
 
-add_action('admin_enqueue_scripts', 'endless_march_enqueue_styles');
+add_action('admin_enqueue_scripts', 'the_endless_march_enqueue_styles');
 
-function endless_march_enqueue_public_styles()
+function the_endless_march_enqueue_public_styles()
 {
 	// wp_enqueue_style(
 	// 	'js-for-web-design',
@@ -107,10 +107,10 @@ function endless_march_enqueue_public_styles()
 	// );
 }
 
-add_action('wp_enqueue_scripts', 'endless_march_enqueue_public_styles');
+add_action('wp_enqueue_scripts', 'the_endless_march_enqueue_public_styles');
 
 
-function endless_march_enqueue_admin_scripts()
+function the_endless_march_enqueue_admin_scripts()
 {
 	wp_enqueue_script(
 		'admin-script',
@@ -121,9 +121,9 @@ function endless_march_enqueue_admin_scripts()
 	);
 }
 
-add_action('admin_enqueue_scripts', 'endless_march_enqueue_admin_scripts');
+add_action('admin_enqueue_scripts', 'the_endless_march_enqueue_admin_scripts');
 
-function endless_march_enqueue_public_scripts()
+function the_endless_march_enqueue_public_scripts()
 {
 	wp_enqueue_script(
 		'public-script',
