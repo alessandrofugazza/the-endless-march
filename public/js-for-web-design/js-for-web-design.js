@@ -18,6 +18,7 @@ class Frame {
     this.thisFrame = addElementToFrame("div", this.parentFrame, { class: "topic-frame" });
     // this.thisFrame.style.display = "none";
     // this.thisFrame.style.opacity = "0";
+
     this.elements.forEach((element) => {
       addElementToFrame(element.type, this.thisFrame, element.attributes);
     });
@@ -65,20 +66,27 @@ let blockIndex = 0;
 const mainContainer = document.querySelector(".jsfwd-container");
 const prevBtn = document.querySelector(".prev-btn");
 const nextBtn = document.querySelector(".next-btn");
-mainContainer.style.minHeight = "30vh";
+mainContainer.style.minHeight = "70vh";
 let activeFrame = mainContainer;
 
 const frames = [
   new Frame(
     "Frame 1",
     [
-      new DOMElement("h2", { textContent: "Variables" }),
-      new DOMElement("p", { textContent: "Something about variables I guess" }),
+      new DOMElement("h2", { textContent: "Introduzione alla programmazione" }),
+      new DOMElement("p", { textContent: "Tipi di dato, variabili, operatori matematici e logici." }),
       new DOMElement("hr"),
-      new DOMElement("h3", { textContent: "Super long text" }),
+      new DOMElement("h3", { textContent: "Tipi di dato" }),
       new DOMElement("p", {
-        textContent:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis ipsum ut turpis rhoncus aliquam. Donec vulputate aliquam dictum. Duis sit amet erat fermentum, aliquam dolor nec, rhoncus tortor. Nulla eu est id metus consectetur malesuada et tristique leo. Phasellus iaculis nulla eros, id suscipit elit elementum a. Suspendisse ut sem tempor, ultrices diam id, venenatis quam. Integer feugiat blandit ipsum, sed rutrum magna fringilla nec. Aenean nisl magna, commodo et porttitor eget, lobortis id neque. Aenean elementum feugiat sem ac dictum. Aenean maximus pellentesque eros quis faucibus. Cras eleifend tincidunt lacus, eget sodales lacus venenatis egestas. In auctor vitae diam congue facilisis. Nulla hendrerit viverra tempus. Suspendisse vel viverra turpis. Praesent ornare scelerisque magna quis blandit. ",
+        textContent: "Cosa si intende con tipo di dato. Stringhe, numeri, booleani, null, undefined.",
+      }),
+      new DOMElement("h3", { textContent: "Variabili" }),
+      new DOMElement("p", {
+        textContent: "placeholder",
+      }),
+      new DOMElement("h3", { textContent: "Operatori matematici e logici" }),
+      new DOMElement("p", {
+        textContent: "placeholder",
       }),
     ],
     mainContainer
@@ -95,25 +103,30 @@ function startMainScript() {
   // frames.forEach((frame) => {
   //   frame.populate();
   // });
+
   prevBtn.onclick = function () {
     if (blockIndex === 0) return;
-    blockIndex--;
-    frames[blockIndex].populate();
-    mainContainer.replaceChildren(frames[blockIndex].thisFrame);
+    fadeOutAndReplace("prev"); // TODO aweful but im tired
   };
+
   nextBtn.onclick = function () {
     if (blockIndex === frames.length - 1) return;
+
     // blockIndex++;
     // frames[blockIndex].populate();
     // mainContainer.replaceChildren(frames[blockIndex].thisFrame);
-    fadeOutAndReplace();
+    fadeOutAndReplace("next");
   };
 }
 
-function fadeOutAndReplace() {
+function fadeOutAndReplace(sequence) {
   frames[blockIndex].thisFrame.classList.add("fade-out");
   frames[blockIndex].thisFrame.addEventListener("transitionend", () => {
-    blockIndex++;
+    if (sequence === "prev") {
+      blockIndex--;
+    } else {
+      blockIndex++;
+    }
     frames[blockIndex].populate();
     mainContainer.replaceChildren(frames[blockIndex].thisFrame);
   });

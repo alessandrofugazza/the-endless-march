@@ -101,7 +101,7 @@ function endless_march_enqueue_public_styles()
 {
 	wp_enqueue_style(
 		'js-for-web-design',
-		plugins_url('public/css/js-for-web-design/js-for-web-design.css', __FILE__),
+		plugins_url('public/js-for-web-design/js-for-web-design.css', __FILE__),
 		array(),
 		'0.1.2'
 	);
@@ -110,7 +110,7 @@ function endless_march_enqueue_public_styles()
 add_action('wp_enqueue_scripts', 'endless_march_enqueue_public_styles');
 
 
-function endless_march_enqueue_admin_scripts()
+function the_endless_march_enqueue_admin_scripts()
 {
 	wp_enqueue_script(
 		'admin-script',
@@ -121,9 +121,9 @@ function endless_march_enqueue_admin_scripts()
 	);
 }
 
-add_action('admin_enqueue_scripts', 'endless_march_enqueue_admin_scripts');
+add_action('admin_enqueue_scripts', 'the_endless_march_enqueue_admin_scripts');
 
-function endless_march_enqueue_public_scripts()
+function the_endless_march_enqueue_public_scripts()
 {
 	wp_enqueue_script(
 		'public-script',
@@ -148,10 +148,21 @@ function endless_march_enqueue_public_scripts()
 	// );
 	wp_enqueue_script(
 		'js-for-web-design',
-		plugins_url('public/js/js-for-web-design/js-for-web-design.js', __FILE__),
+		plugins_url('public/js-for-web-design/js-for-web-design.js', __FILE__),
 		array(),
 		'0.1.2',
 		true
 	);
+
+	add_filter('script_loader_tag', 'the_endless_march_add_defer_attribute', 10, 2);
 }
-add_action('wp_enqueue_scripts', 'endless_march_enqueue_public_scripts');
+
+function the_endless_march_add_defer_attribute($tag, $handle)
+{
+	if ('js-for-web-design' === $handle) {
+		return str_replace(' src', ' defer src', $tag);
+	}
+	return $tag;
+}
+
+add_action('wp_enqueue_scripts', 'the_endless_march_enqueue_public_scripts');
