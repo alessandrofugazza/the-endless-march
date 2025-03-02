@@ -4,6 +4,7 @@
 const mainContainer = document.querySelector(".lame-editor-container");
 const form = mainContainer.querySelector("form");
 const submitButton = form.querySelector(".wpform-lame-submit-btn");
+const dataDisplayContainer = document.querySelector(".data-display-container");
 
 submitButton.style.display = "none";
 
@@ -87,13 +88,17 @@ form.onsubmit = function (event) {
   }
 };
 
-window.addEventListener("load", function () {
+const loadData = () => {
   const lameStoredData = JSON.parse(localStorage.getItem("lameData")) || [];
   lameStoredData.forEach((element) => {
     const newElement = document.createElement(element.tag);
     newElement.textContent = element.text;
-    mainContainer.appendChild(newElement);
+    dataDisplayContainer.appendChild(newElement);
   });
+};
+
+window.addEventListener("load", function () {
+  loadData();
 });
 
 // // tag
