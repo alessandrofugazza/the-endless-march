@@ -19,7 +19,58 @@ const lameSubmitBtn = document.createElement("button");
 lameSubmitBtn.type = "submit";
 lameSubmitBtn.textContent = "Aggiungi";
 
-form.appendChild(lameSubmitBtn);
+const lameEraseBtn = document.createElement("button");
+lameEraseBtn.type = "button";
+// lameEraseBtn.style.backgroundColor = "red";
+// lameEraseBtn.style.color = "white";
+// lameEraseBtn.style.cursor = "pointer";
+// lameEraseBtn.style.paddingInline = "15px";
+// lameEraseBtn.style.fontFamily = "inherit";
+// lameEraseBtn.style.fontSize = "17px";
+// lameEraseBtn.style.height = "41px";
+
+// lameEraseBtn.addEventListener("mouseover", function () {
+//   lameEraseBtn.style.backgroundColor = "darkred";
+// });
+
+// lameEraseBtn.addEventListener("mouseout", function () {
+//   lameEraseBtn.style.backgroundColor = "red";
+// });
+
+btnDiv = document.createElement("div");
+btnDiv.style.display = "flex";
+btnDiv.style.gap = "10px";
+
+btnDiv.appendChild(lameSubmitBtn);
+// appending this here bc copy styles requires the element to be rendereed I CANNOT BOTHER WITH MANUALLY COPYING THE STYLE
+form.appendChild(btnDiv);
+
+const sourceElement = lameSubmitBtn;
+const targetElement = lameEraseBtn;
+
+const computedStyles = window.getComputedStyle(sourceElement);
+
+for (let prop of computedStyles) {
+  targetElement.style[prop] = computedStyles.getPropertyValue(prop);
+}
+
+lameEraseBtn.style.backgroundColor = "red";
+lameEraseBtn.addEventListener("mouseover", function () {
+  lameEraseBtn.style.backgroundColor = "darkred";
+});
+
+lameEraseBtn.addEventListener("mouseout", function () {
+  lameEraseBtn.style.backgroundColor = "red";
+});
+
+lameEraseBtn.textContent = "Cancella tutto";
+
+lameEraseBtn.style.width = "auto";
+
+// btnDiv.appendChild(lameSubmitBtn);
+// btnDiv.appendChild(lameEraseBtn);
+
+btnDiv.appendChild(lameEraseBtn);
 
 form.onsubmit = function (event) {
   event.preventDefault();
