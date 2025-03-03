@@ -12,6 +12,7 @@ submitButton.style.display = "none";
 // // text
 const formText = form.querySelector(".wpform-lame-text input");
 const formTag = form.querySelector(".wpform-lame-html-tag");
+const formStyle = form.querySelector(".wpform-lame-style-checkboxes");
 // formText.type = "text";
 // formText.placeholder = "Scrivi qualcosa …";
 // formElements.push(formText);
@@ -68,20 +69,27 @@ lameEraseBtn.textContent = "Cancella tutto";
 
 lameEraseBtn.style.width = "auto";
 
-// btnDiv.appendChild(lameSubmitBtn);
+lameEraseBtn.addEventListener("click", function () {
+  localStorage.removeItem("lameData");
+  while (dataDisplayContainer.firstChild) {
+    dataDisplayContainer.removeChild(dataDisplayContainer.firstChild);
+  }
+});
 // btnDiv.appendChild(lameEraseBtn);
 
 btnDiv.appendChild(lameEraseBtn);
 
 form.onsubmit = function (event) {
   event.preventDefault();
-  // window.alert("Form submitted!");
   const text = formText.value;
   const selectedTag = formTag.querySelector(".wpforms-selected input");
   const tag = selectedTag.value;
+  const selectedStyles = Array.from(formStyle.querySelectorAll("input[type='checkbox']:checked")).map((checkbox) =>
+    checkbox.value.toLowerCase()
+  );
 
   if (text.trim() !== "" && tag.trim() !== "") {
-    const formData = { text, tag };
+    const formData = { text, tag, style: selectedStyles };
     let lameStoredData = JSON.parse(localStorage.getItem("lameData")) || [];
     lameStoredData.push(formData);
     localStorage.setItem("lameData", JSON.stringify(lameStoredData));
@@ -93,6 +101,13 @@ const loadData = () => {
   lameStoredData.forEach((element) => {
     const newElement = document.createElement(element.tag);
     newElement.textContent = element.text;
+    // IMPROVE use obj with true false instead, using strings for booleans is bad
+    if (element.style.includes("grassetto")) {
+      newElement.style.fontWeight = "bold";
+    }
+    if (element.style.includes("corsivo")) {
+      newElement.style.fontStyle = "italic";
+    }
     dataDisplayContainer.appendChild(newElement);
   });
 };
