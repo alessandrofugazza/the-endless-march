@@ -1,5 +1,8 @@
 // TODO atwindow load
 // TODO add safe checks
+// TODO add handlebars
+
+const noTextTags = ["hr", "br"];
 
 const mainContainer = document.querySelector(".lame-editor-container");
 const form = mainContainer.querySelector("form");
@@ -8,14 +11,10 @@ const dataDisplayContainer = document.querySelector(".data-display-container");
 
 submitButton.style.display = "none";
 
-// // form elements
-// // text
 const formText = form.querySelector(".wpform-lame-text input");
+// const formText = form.querySelector(".wpform-lame-text textarea");
 const formTag = form.querySelector(".wpform-lame-html-tag");
 const formStyle = form.querySelector(".wpform-lame-style-checkboxes");
-// formText.type = "text";
-// formText.placeholder = "Scrivi qualcosa …";
-// formElements.push(formText);
 
 const lameSubmitBtn = document.createElement("button");
 lameSubmitBtn.type = "submit";
@@ -23,21 +22,6 @@ lameSubmitBtn.textContent = "Aggiungi";
 
 const lameEraseBtn = document.createElement("button");
 lameEraseBtn.type = "button";
-// lameEraseBtn.style.backgroundColor = "red";
-// lameEraseBtn.style.color = "white";
-// lameEraseBtn.style.cursor = "pointer";
-// lameEraseBtn.style.paddingInline = "15px";
-// lameEraseBtn.style.fontFamily = "inherit";
-// lameEraseBtn.style.fontSize = "17px";
-// lameEraseBtn.style.height = "41px";
-
-// lameEraseBtn.addEventListener("mouseover", function () {
-//   lameEraseBtn.style.backgroundColor = "darkred";
-// });
-
-// lameEraseBtn.addEventListener("mouseout", function () {
-//   lameEraseBtn.style.backgroundColor = "red";
-// });
 
 btnDiv = document.createElement("div");
 btnDiv.style.display = "flex";
@@ -75,15 +59,18 @@ lameEraseBtn.addEventListener("click", function () {
     dataDisplayContainer.removeChild(dataDisplayContainer.firstChild);
   }
 });
-// btnDiv.appendChild(lameEraseBtn);
 
 btnDiv.appendChild(lameEraseBtn);
 
 form.onsubmit = function (event) {
   event.preventDefault();
-  const text = formText.value;
   const selectedTag = formTag.querySelector(".wpforms-selected input");
   const tag = selectedTag.value;
+  if (noTextTags.includes(tag)) {
+    return;
+  }
+  const text = formText.value;
+  // console.log(text.value);
   const selectedStyles = Array.from(formStyle.querySelectorAll("input[type='checkbox']:checked")).map((checkbox) =>
     checkbox.value.toLowerCase()
   );
@@ -115,86 +102,3 @@ const loadData = () => {
 window.addEventListener("load", function () {
   loadData();
 });
-
-// // tag
-// const tagSelect = document.createElement("select");
-// const tags = ["p", "code", "h2", "h3", "h4", "h5", "h6"];
-// tags.forEach((tag) => {
-//   const option = document.createElement("option");
-//   option.value = tag;
-//   option.textContent = tag;
-//   tagSelect.appendChild(option);
-// });
-// formElements.push(tagSelect);
-
-// // bold
-// const boldCheckbox = document.createElement("input");
-// boldCheckbox.type = "checkbox";
-// boldCheckbox.id = "bold-checkbox";
-// const boldLabel = document.createElement("label");
-// boldLabel.htmlFor = "bold-checkbox";
-// boldLabel.textContent = "Bold";
-
-// formElements.push(boldCheckbox);
-// formElements.push(boldLabel);
-
-// // italic
-// const italicCheckbox = document.createElement("input");
-// italicCheckbox.type = "checkbox";
-// italicCheckbox.id = "italic-checkbox";
-// const italicLabel = document.createElement("label");
-// italicLabel.htmlFor = "italic-checkbox";
-// italicLabel.textContent = "Italic";
-
-// formElements.push(italicCheckbox);
-// formElements.push(italicLabel);
-
-// // submit button
-// const addButton = document.createElement("button");
-// addButton.type = "submit";
-// addButton.textContent = "Aggiungi";
-// formElements.push(addButton);
-
-// // font size
-// const fontSizeInput = document.createElement("input");
-// fontSizeInput.type = "number";
-// fontSizeInput.placeholder = "Font size (px)";
-// fontSizeInput.min = "8";
-// fontSizeInput.max = "28";
-// fontSizeInput.value = "11";
-// // TODO check validity
-// formElements.push(fontSizeInput);
-
-// formElements.forEach((element) => {
-//   appendFormElement(element);
-// });
-
-// mainContainer.appendChild(elementEditorForm);
-
-// elementEditorForm.addEventListener("submit", function (event) {
-//   event.preventDefault();
-
-//   const tag = tagSelect.value;
-//   const text = formText.value;
-//   const isBold = boldCheckbox.checked;
-//   const isItalic = italicCheckbox.checked;
-//   const fontSize = fontSizeInput.value;
-
-//   if (text.trim() !== "") {
-//     const newElement = document.createElement(tag);
-
-//     newElement.textContent = text;
-
-//     if (isBold) {
-//       newElement.style.fontWeight = "bold";
-//     }
-//     if (isItalic) {
-//       newElement.style.fontStyle = "italic";
-//     }
-//     if (fontSize) {
-//       newElement.style.fontSize = `${fontSize}px`;
-//     }
-//     mainContainer.appendChild(newElement);
-//     formText.value = "";
-//   }
-// });
